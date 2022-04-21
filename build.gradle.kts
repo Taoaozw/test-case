@@ -1,26 +1,43 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") version "1.6.20"
+    java
+    kotlin("jvm") version "1.6.20-RC2"
 }
 
-group = "io.github"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-dependencies {
-    implementation(kotlin("stdlib"))
-    testImplementation(libs.bundles.kotest)
+subprojects {
+    group = "io.github"
+    version = "1.0-SNAPSHOT"
+
+    apply(plugin = "kotlin")
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+        implementation(kotlin("reflect"))
+        implementation(rootProject.libs.kt.log)
+        testImplementation(rootProject.libs.bundles.test)
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+
 }
+
 
 tasks.test {
     useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
