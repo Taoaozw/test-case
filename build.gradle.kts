@@ -8,11 +8,13 @@ group = "io.github"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    implementation(kotlin("stdlib"))
+    testImplementation(libs.bundles.kotest)
 }
 
 tasks.test {
