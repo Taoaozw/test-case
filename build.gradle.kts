@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
-    kotlin("jvm") version "1.6.20-RC2"
+    alias(libs.plugins.kotlin.jvm)
 }
 
 

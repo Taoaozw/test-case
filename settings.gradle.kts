@@ -7,7 +7,7 @@ dependencyResolutionManagement {
             version("spring-cloud", "2021.0.1")
             version("vertx", "4.2.6")
             version("kotlin", "1.6.20")
-            version("kotlin-logging", "2.1.21")
+            version("kotlin-logging", "2+")
             version("jackson") {
                 strictly("2.13.+")
                 reject("2.13.2.1")
@@ -39,7 +39,7 @@ dependencyResolutionManagement {
             library("jackson-jsr310", "com.fasterxml.jackson.datatype", "jackson-datatype-jsr310").versionRef("jackson")
 
 
-            library("kt-log", "io.github.microutils", "kotlin-logging-jvm").version("kotlin-logging")
+            library("kt-log", "io.github.microutils", "kotlin-logging-jvm").versionRef("kotlin-logging")
 
             library("logback-core", "ch.qos.logback", "logback-core").versionRef("logback")
             library("logback-classic", "ch.qos.logback", "logback-classic").versionRef("logback")
