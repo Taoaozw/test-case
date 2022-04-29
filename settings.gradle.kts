@@ -1,6 +1,6 @@
 rootProject.name = "test-program"
 include("basic")
-
+include("git-action")
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
