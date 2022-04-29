@@ -10,7 +10,7 @@ RUN rm -f /etc/localtime  \
 
 # 将当前目录下的jar包复制到docker容器的/目录下
 
-ADD build/libs/git-action.jar /app/git-action.jar
+ADD /git-action/build/libs/git-action.jar /app/git-action.jar
 
 # 指定docker容器启动时运行jar包
 
