@@ -52,3 +52,20 @@ jobs:
           push: true
 
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/git-action:latest
+      # push后，用ssh连接服务器执行脚本
+
+      - name: SSH
+
+        uses: fifsky/ssh-action@master
+
+        with:
+
+          command: |
+
+            sh start.sh
+
+          host: ${{ secrets.HOST }}
+
+          user: ${{ secrets.USER }}
+
+          key: ${{ secrets.PRIVATE_KEY}}
