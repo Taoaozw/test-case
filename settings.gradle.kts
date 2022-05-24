@@ -1,6 +1,7 @@
 rootProject.name = "test-program"
 include("basic")
 include("git-action")
+include("akka")
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
