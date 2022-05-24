@@ -1,7 +1,7 @@
 package io.github.parse
 
 
-internal class Token(val type: TokenType, val value: String) {
+class Token(val type: TokenType, val value: String) {
     override fun toString(): String {
         return "$type:$value"
     }
@@ -29,7 +29,7 @@ class Interpreter(
                 chars[pos].isPlus() -> plus()
                 chars[pos].isMinus() -> minus()
                 chars[pos].isDigit() -> digit()
-                chars[pos].isMulti() -> multi()
+                chars[pos].isMul() -> multi()
                 chars[pos].isDiv() -> div()
                 chars[pos].isLParen() -> lParen()
                 chars[pos].isRParen() -> rParen()
@@ -51,7 +51,7 @@ class Interpreter(
 
     private fun plus() = advance(TokenType.PLUS)
     private fun minus() = advance(TokenType.MINUS)
-    private fun multi() = advance(TokenType.MULTI)
+    private fun multi() = advance(TokenType.MUL)
     private fun div() = advance(TokenType.DIV)
     private fun lParen() = advance(TokenType.LPAREN)
     private fun rParen() = advance(TokenType.RPAREN)
@@ -104,7 +104,7 @@ class Interpreter(
             eat(op)
             val right = factor()
             left = when (op) {
-                TokenType.MULTI -> left * right
+                TokenType.MUL -> left * right
                 TokenType.DIV -> left / right
                 else -> throw TokenParseException("Unexpected token ${currentToken.type}")
             }
@@ -131,16 +131,16 @@ class Interpreter(
 class TokenParseException(message: String) : Exception(message)
 
 enum class TokenType {
-    EOF, INTEGER, PLUS, MINUS, MULTI, DIV, LPAREN, RPAREN;
+    EOF, INTEGER, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN;
 
     fun onMultiOrDiv(): Boolean {
-        return this == MULTI || this == DIV
+        return this == MUL || this == DIV
     }
 }
 
 fun Char.isPlus(): Boolean = this == '+'
 fun Char.isMinus(): Boolean = this == '-'
-fun Char.isMulti(): Boolean = this == '*'
+fun Char.isMul(): Boolean = this == '*'
 fun Char.isDiv(): Boolean = this == '/'
 fun Char.isLParen(): Boolean = this == '('
 fun Char.isRParen(): Boolean = this == ')'
