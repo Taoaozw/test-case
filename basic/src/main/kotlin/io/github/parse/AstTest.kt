@@ -2,7 +2,11 @@ package io.github.parse
 
 sealed interface AST
 
+
+data class UnaryOp(val op: Token, val right: AST) : AST
+
 data class BinOp(val left: AST, val op: Token, val right: AST) : AST
+
 
 data class Num(val value: Int, val type: TokenType) : AST
 
@@ -82,6 +86,14 @@ class Parse(private val lexer: Lexer) {
     private fun factor(): AST {
         val tem = currentToken
         return when (currentToken.type) {
+            TokenType.PLUS -> {
+                eatAndNext(TokenType.PLUS)
+                UnaryOp(tem, factor())
+            }
+            TokenType.MINUS -> {
+                eatAndNext(TokenType.MINUS)
+                UnaryOp(tem, factor())
+            }
             TokenType.INTEGER -> {
                 eatAndNext(TokenType.INTEGER)
                 Num(tem.value.toInt(), tem.type)
@@ -152,6 +164,15 @@ object MyInterpreter : NodeVisitor {
         return when (node) {
             is BinOp -> visitBiOp(node)
             is Num -> visitNum(node)
+            is UnaryOp -> visitUnaryOp(node)
+        }
+    }
+
+    private fun visitUnaryOp(node: UnaryOp): Int {
+        return when (node.op.type) {
+            TokenType.PLUS -> visit(node.right)
+            TokenType.MINUS -> -visit(node.right)
+            else -> throw IllegalArgumentException("visitUnaryOp only support PLUS or MINUS but ${node.op.type} found")
         }
     }
 
@@ -182,7 +203,7 @@ fun main() {
 
     val minusOp = BinOp(plusOp, minusToken, Num(2, TokenType.INTEGER))
 
-    val lexer = Lexer("1*(2+3*3)+100")
+    val lexer = Lexer("1*(--2+3*-3)+100")
 
     val message = Parse(lexer).expr()
     println(message)
