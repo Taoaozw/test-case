@@ -169,8 +169,8 @@ class PostLexer(
 
 
 //
-// name=abcd
-// name=eq.abc
+// name="abcd"
+// name=eq."abc"
 // name=age.not.eq.123
 //
 // name=or("age".eq.or(18,22),and(address.eq."home",school.eq.ust=c))

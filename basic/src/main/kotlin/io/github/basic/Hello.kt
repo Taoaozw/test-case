@@ -5,4 +5,13 @@ import kotlin.concurrent.*
 
 class Hello {
 
+
+}
+
+fun main() {
+    var x: Int? =null
+    when(x){
+        null -> println("null")
+        else -> println("not null")
+    }
 }
