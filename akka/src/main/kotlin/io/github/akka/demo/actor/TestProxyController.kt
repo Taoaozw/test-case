@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/actor")
-class TestProxyController( val service: TestService) {
+class TestProxyController(val service: TestService) {
 
 
     @RequestMapping("/test")

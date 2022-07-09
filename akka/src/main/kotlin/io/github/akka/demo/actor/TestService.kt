@@ -1,8 +1,8 @@
 package io.github.akka.demo.actor
 
 import org.springframework.context.*
-import org.springframework.scheduling.annotation.Async
-import org.springframework.stereotype.Service
+import org.springframework.scheduling.annotation.*
+import org.springframework.stereotype.*
 import java.lang.Thread.*
 
 
@@ -13,9 +13,10 @@ class TestService : ApplicationContextAware {
 
 
     fun hello() {
-        context.getBean(TestService::class.java).naaa()
+//        context.getBean(TestService::class.java).naaa()
         //println("sleep start")
-            //naaa()
+        //naaa()
+        naaa()
     }
 
     @Async
