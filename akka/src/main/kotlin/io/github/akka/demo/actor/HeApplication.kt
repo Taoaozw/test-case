@@ -6,10 +6,14 @@ import org.springframework.boot.context.event.*
 import org.springframework.cglib.core.*
 import org.springframework.context.annotation.*
 import org.springframework.context.event.EventListener
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.scheduling.annotation.*
+import org.springframework.transaction.annotation.EnableTransactionManagement
 
-@EnableAsync(mode = AdviceMode.ASPECTJ)
+@EnableJpaRepositories
 @SpringBootApplication
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
+@EnableAsync(mode = AdviceMode.ASPECTJ)
 class HeApplication {
     companion object {
         @JvmStatic

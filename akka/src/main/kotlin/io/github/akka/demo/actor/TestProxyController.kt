@@ -11,4 +11,7 @@ class TestProxyController(val service: TestService) {
     fun test() {
         service.hello()
     }
+
+
 }
+

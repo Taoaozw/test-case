@@ -1,15 +1,19 @@
 package io.github.akka.demo.actor
 
 import org.springframework.context.*
-import org.springframework.scheduling.annotation.*
+import org.springframework.data.jpa.repository.*
 import org.springframework.stereotype.*
+import org.springframework.transaction.annotation.*
 import java.lang.Thread.*
+import javax.persistence.*
 
 
 @Service
-class TestService : ApplicationContextAware {
+class TestService(val repo:DaRepository) : ApplicationContextAware {
 
     lateinit var context: ApplicationContext
+
+
 
 
     fun hello() {
@@ -19,13 +23,26 @@ class TestService : ApplicationContextAware {
         naaa()
     }
 
-    @Async
+    @Transactional
     fun naaa() {
-        sleep(2000)
-        println("sleep end")
+        repo.saveAndFlush(Da(name = "test"))
+        repo.saveAndFlush(Da(name = "dsadasda"))
     }
 
     override fun setApplicationContext(applicationContext: ApplicationContext) {
         context = applicationContext
     }
 }
+
+@Entity
+class Da(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id:Long =0,
+
+    val name:String
+)
+
+
+@Service
+interface DaRepository : JpaRepository<Da, Long>

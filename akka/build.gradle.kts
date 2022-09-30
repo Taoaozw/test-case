@@ -4,6 +4,7 @@ plugins {
     application
     id("io.freefair.aspectj") version "6.5.0.2"
     alias(libs.plugins.spring)
+    kotlin("plugin.jpa") version "1.6.20"
     alias(libs.plugins.spring.dependency)
     alias(libs.plugins.kotlin.spring)
 }
@@ -11,14 +12,11 @@ plugins {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("mysql:mysql-connector-java:8.0.29")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
     implementation("org.springframework:spring-aspects:5.3.21")
-    // https://mvnrepository.com/artifact/org.aspectj/aspectjrt
-    // https://mvnrepository.com/artifact/org.springframework/spring-instrument
-    implementation("org.springframework:spring-instrument:5.3.21")
-
-
 }
 tasks.compileKotlin {
     kotlinOptions {

@@ -1,7 +1,9 @@
 rootProject.name = "test-program"
-include("basic")
-include("git-action")
-include("akka")
+//include("basic")
+//include("git-action")
+//include("aspectj")
+//include("akka")
+include("concurrent-test")
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
